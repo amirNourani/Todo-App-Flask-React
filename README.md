@@ -1,11 +1,11 @@
-# Flask-Todo-App
+# Todo app with flask and react
 Todo app build with flask and react
 
 
 ## Setup
 notice that first you need to install the requirement packages. open your terminal and write below commands:
 ```
-$ cd Flask-Todo-App/
+$ cd Todo-App-Flask-React/
 $ pip install -r requirements.txt 
 ```
 Then run the file main.py using: 
