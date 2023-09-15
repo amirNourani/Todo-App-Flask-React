@@ -48,14 +48,15 @@ def index():
 
 @app.route("/tasks", methods=["GET"])
 def get_tasks():
-    tasks = Task.query.all()
+    tasks = db.session.query(Task).all()
     result = tasks_schema.dump(tasks)
     return jsonify(result)
 
 
 @app.route("/tasks/<id>", methods=["GET"])
 def task_detail(id: int):
-    task = Task.query.get(id) or None
+    task = db.session.get(Task, id) or None
+    print(task)
     if task is None:
         return {"message": "task not found."}
     else:
@@ -78,7 +79,7 @@ def add_task():
 
 @app.route("/tasks/<id>/update", methods=["PUT"])
 def udpate_task(id: int):
-    task = Task.query.get(id) or None
+    task = db.session.get(Task, id) or None
     if not task:
         return {"message": "task not found"}
     else:
@@ -92,7 +93,7 @@ def udpate_task(id: int):
 
 @app.route("/tasks/<id>/delete", methods=["DELETE"])
 def delete_task(id: int):
-    task = Task.query.get(id) or None
+    task = db.session.get(Task, id) or None
     if not task:
         return {"message": "task not found"}
     else:
@@ -104,4 +105,4 @@ def delete_task(id: int):
 if __name__ == "__main__":
     app.app_context().push()
     db.create_all()
-    app.run(debug=True)
+    app.run()

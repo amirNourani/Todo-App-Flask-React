@@ -23,7 +23,9 @@ function Todo(props) {
     <React.Fragment>
       <div className={className}>
         <h5>Title: {todo.title}</h5>
-        <p className="mx-5 my-4">Description: {todo.body}</p>
+        {todo.body ? (
+          <p className="mx-5 my-4">Description: {todo.body}</p>
+        ) : null}
         <p className="mx-2">Date: {todo.date}</p>
         <div className="row mx-2">
           <div className="col-1 my-1 mx-2">
