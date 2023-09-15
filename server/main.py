@@ -64,13 +64,16 @@ def task_detail(id: int):
 
 @app.route("/add", methods=["POST"])
 def add_task():
-    title = request.json["title"]
-    body = request.json["body"]
+    title = request.json["title"] or None
+    body = request.json["body"] or None
 
-    task = Task(title, body)
-    db.session.add(task)
-    db.session.commit()
-    return task_schema.jsonify(task)
+    if title is not None:
+        task = Task(title, body)
+        db.session.add(task)
+        db.session.commit()
+        return task_schema.jsonify(task)
+    else:
+        return {"message": "Title can not be empty"}
 
 
 @app.route("/tasks/<id>/update", methods=["PUT"])
